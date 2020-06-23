@@ -15,11 +15,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-if [ "$(basename $0)" == "inspec" ] ; then
+if [[ "$(basename "$0")" == "inspec" ]] ; then
   name="cinc-auditor"
 else
-  name="$(basename ${0/chef/cinc})"
+  name="$(basename "${0/chef/cinc}")"
 fi
 echo "Redirecting to ${name}..."
 
-exec /opt/cinc/bin/${name} "$@"
+exec "/opt/cinc/bin/${name}" "$@"
