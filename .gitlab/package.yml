@@ -47,10 +47,10 @@
     - bundle install --without development --path ${CI_PROJECT_DIR}/bundle/vendor
     - sudo rm -rf /var/cache/omnibus/pkg/*
     - sudo -E bundle exec omnibus build cinc --override append_timestamp:false
-    - find ${CI_PROJECT_DIR}/data -type f -print0 | xargs -0 openssl dgst -sha256
     - mkdir -p ${CI_PROJECT_DIR}/data/mac_os_x/${PLATFORM_VER}
     - sudo chown -R omnibus:omnibus pkg
     - mv -v pkg/cinc*dmg* ${CI_PROJECT_DIR}/data/mac_os_x/${PLATFORM_VER}/
+    - find ${CI_PROJECT_DIR}/data/mac_os_x/${PLATFORM_VER} -type f -print0 | xargs -0 openssl dgst -sha256
   after_script:
     - sudo bundle exec omnibus clean cinc
     - sudo rm -rf /opt/cinc/*
@@ -72,9 +72,9 @@
     - cd chef\omnibus
     - bundle install --without development --path ${CI_PROJECT_DIR}/bundle/vendor
     - bundle exec omnibus build cinc --override append_timestamp:false
-    - Get-FileHash ${CI_PROJECT_DIR}/data/* -Algorithm SHA256
     - mkdir.exe -p ${CI_PROJECT_DIR}/data/windows/${PLATFORM_VER}
     - mv.exe -v pkg/cinc* ${CI_PROJECT_DIR}/data/windows/${PLATFORM_VER}
+    - Get-FileHash ${CI_PROJECT_DIR}/data/windows/${PLATFORM_VER}/* -Algorithm SHA256
   after_script:
     - $ErrorActionPreference = "Stop"
     - C:\omnibus\load-omnibus-toolchain.ps1
