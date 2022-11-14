@@ -22,18 +22,21 @@
 .package:amazonlinux:
   extends: .package
   after_script:
+    - find ${CI_PROJECT_DIR}/data -type f -print0 | xargs -0 sha256sum
     - mkdir -p ${CI_PROJECT_DIR}/data/amazon/${PLATFORM_VER}
     - mv -v ${CI_PROJECT_DIR}/data/*.{rpm,json} ${CI_PROJECT_DIR}/data/amazon/${PLATFORM_VER}/
 
 .package:centos:
   extends: .package
   after_script:
+    - find ${CI_PROJECT_DIR}/data -type f -print0 | xargs -0 sha256sum
     - mkdir -p ${CI_PROJECT_DIR}/data/el/${PLATFORM_VER}
     - mv -v ${CI_PROJECT_DIR}/data/*.{rpm,json} ${CI_PROJECT_DIR}/data/el/${PLATFORM_VER}/
 
 .package:debian:
   extends: .package
   after_script:
+    - find ${CI_PROJECT_DIR}/data -type f -print0 | xargs -0 sha256sum
     - mkdir -p ${CI_PROJECT_DIR}/data/debian/${PLATFORM_VER}
     - mv -v ${CI_PROJECT_DIR}/data/*.{deb,json} ${CI_PROJECT_DIR}/data/debian/${PLATFORM_VER}/
 
@@ -51,6 +54,7 @@
     - mkdir -p ${CI_PROJECT_DIR}/data/mac_os_x/${PLATFORM_VER}
     - sudo chown -R omnibus:omnibus pkg
     - mv -v pkg/cinc*dmg* ${CI_PROJECT_DIR}/data/mac_os_x/${PLATFORM_VER}/
+    - find ${CI_PROJECT_DIR}/data/mac_os_x/${PLATFORM_VER} -type f -print0 | xargs -0 openssl dgst -sha256
   after_script:
     - sudo chown -R omnibus cache/ bundle/
     - sudo rm -rf /opt/cinc/
@@ -60,6 +64,7 @@
 .package:opensuse:
   extends: .package
   after_script:
+    - find ${CI_PROJECT_DIR}/data -type f -print0 | xargs -0 sha256sum
     - mkdir -p ${CI_PROJECT_DIR}/data/sles/${PLATFORM_VER}
     - mv -v ${CI_PROJECT_DIR}/data/*.{rpm,json} ${CI_PROJECT_DIR}/data/sles/${PLATFORM_VER}/
 
@@ -76,6 +81,7 @@
     - bundle exec omnibus build cinc -l ${OMNIBUS_LOG_LEVEL} --override append_timestamp:false
     - mkdir.exe -p ${CI_PROJECT_DIR}/data/windows/${PLATFORM_VER}
     - mv.exe -v pkg/cinc* ${CI_PROJECT_DIR}/data/windows/${PLATFORM_VER}
+    - Get-FileHash ${CI_PROJECT_DIR}/data/windows/${PLATFORM_VER}/* -Algorithm SHA256
   after_script:
     - $ErrorActionPreference = "Stop"
     - Remove-Item -Recurse -Force C:\cinc-project
@@ -83,5 +89,6 @@
 .package:ubuntu:
   extends: .package
   after_script:
+    - find ${CI_PROJECT_DIR}/data -type f -print0 | xargs -0 sha256sum
     - mkdir -p ${CI_PROJECT_DIR}/data/ubuntu/${PLATFORM_VER}
     - mv -v ${CI_PROJECT_DIR}/data/*.{deb,json} ${CI_PROJECT_DIR}/data/ubuntu/${PLATFORM_VER}/
