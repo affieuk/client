@@ -1,4 +1,3 @@
-
 Cinc-client is a FOSS distribution of Chef Infra&trade; client, licensed under Apache-2.0.
 
 This repo contains all the required pipeline code to output functional builds of of the Chef Infra&trade; codebase under the rebranded name Cinc Client, designed to be compliant with Chef Software's [Policy on Trademarks](https://www.chef.io/trademark-policy/)
@@ -20,7 +19,7 @@ To use a specific branch or a PR as source, find the branch and source of the PR
 
 ## Getting started with Cinc
 
-See the [quick start](https://www.cinc.sh/quickstart/) section of our website, or jump directly to [downloads](http://downloads.cinc.sh/files/stable/cinc/).
+See the [getting started](https://www.cinc.sh/start/) section of our website, or jump directly to [downloads](http://downloads.cinc.sh/files/stable/cinc/).
 
 ## Contributing
 
